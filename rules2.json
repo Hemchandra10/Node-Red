@@ -1,0 +1,26 @@
+[
+    {
+        "Rule Name": "Apply Discount",
+        "Condition": "price",
+        "Operator": ">",
+        "value": 1000,
+        "Action Type": "Discount",
+        "Action Value": 0.9
+    },
+    {
+        "Rule Name": "More Discount",
+        "Condition": "price",
+        "Operator": ">=",
+        "value": 2000,
+        "Action Type": "Discount",
+        "Action Value": 0.8
+    },
+    {
+        "Rule Name": "No Discount",
+        "Condition": "price",
+        "Operator": "<",
+        "value": 1000,
+        "Action Type": "No Discount",
+        "Action Value": NaN
+    }
+]
