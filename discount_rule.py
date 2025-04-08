@@ -74,3 +74,5 @@ print(json.dumps({
     "original_price": price,
     "message": "No matching rule found"
 }))
+
+#curl -X POST http://localhost:1880/apply-discount -H "Content-Type: application/json" -d '{"price": 2000, "medication": "MedX"}'
