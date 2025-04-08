@@ -1,0 +1,117 @@
+[
+    {
+        "id": "1c704719e1a40a16",
+        "type": "tab",
+        "label": "Medication & Discount",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "df665e7e78ca0d25",
+        "type": "inject",
+        "z": "1c704719e1a40a16",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"patient_id\":101,\"medication\":\"Aspirin\",\"days_since_last_refill\":55,\"price\":3000,\"stage\":\"resent_reminder\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "5bb642b95b2dcfbe"
+            ]
+        ]
+    },
+    {
+        "id": "5bb642b95b2dcfbe",
+        "type": "function",
+        "z": "1c704719e1a40a16",
+        "name": "function 2",
+        "func": "let jsonInput = JSON.stringify(msg.payload);\nmsg.payload = `python3 discount_and_medication.py '${jsonInput}'`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "26e5b975466f68a6"
+            ]
+        ]
+    },
+    {
+        "id": "26e5b975466f68a6",
+        "type": "exec",
+        "z": "1c704719e1a40a16",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "8cb8c88df294cd51"
+            ],
+            [
+                "ca62176daa67501f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8cb8c88df294cd51",
+        "type": "debug",
+        "z": "1c704719e1a40a16",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ca62176daa67501f",
+        "type": "debug",
+        "z": "1c704719e1a40a16",
+        "name": "Error Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 160,
+        "wires": []
+    }
+]

@@ -1,0 +1,134 @@
+[
+    {
+        "id": "0911c3ac4f41ea09",
+        "type": "tab",
+        "label": "Discount_rule",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5933c9ce3a4a1c1c",
+        "type": "function",
+        "z": "0911c3ac4f41ea09",
+        "name": "Build Python cmd",
+        "func": "const input = JSON.stringify(msg.payload);\nmsg.payload = \"python3 /workspaces/Node-Red/discount_rule.py '\" + input + \"'\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "a9f13b8d281f70f3"
+            ]
+        ]
+    },
+    {
+        "id": "a9f13b8d281f70f3",
+        "type": "exec",
+        "z": "0911c3ac4f41ea09",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 570,
+        "y": 100,
+        "wires": [
+            [
+                "2c04dc838bb1e2e9"
+            ],
+            [
+                "2a70aa0f6d3b576a"
+            ],
+            []
+        ],
+        "info": "Used to execute the python script"
+    },
+    {
+        "id": "2c04dc838bb1e2e9",
+        "type": "json",
+        "z": "0911c3ac4f41ea09",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 790,
+        "y": 80,
+        "wires": [
+            [
+                "477925460d3fe139"
+            ]
+        ]
+    },
+    {
+        "id": "2a70aa0f6d3b576a",
+        "type": "debug",
+        "z": "0911c3ac4f41ea09",
+        "name": "Error Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ca2cb12834aeb9f6",
+        "type": "inject",
+        "z": "0911c3ac4f41ea09",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"price\":2500,\"medication\":\"Aspirin\"}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "5933c9ce3a4a1c1c"
+            ]
+        ]
+    },
+    {
+        "id": "477925460d3fe139",
+        "type": "debug",
+        "z": "0911c3ac4f41ea09",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 100,
+        "wires": []
+    }
+]

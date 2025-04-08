@@ -1,0 +1,117 @@
+[
+    {
+        "id": "a49afda26cd8355f",
+        "type": "tab",
+        "label": "Medication_rule",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "26e4e5ab3a7254d5",
+        "type": "inject",
+        "z": "a49afda26cd8355f",
+        "name": "Input",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"patient_id\":101,\"medication\":\"Aspirin\",\"stage\":\"reminder_sent\",\"days_since_last_refill\":45}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "5bb149767bd2839e"
+            ]
+        ]
+    },
+    {
+        "id": "5bb149767bd2839e",
+        "type": "function",
+        "z": "a49afda26cd8355f",
+        "name": "function 1",
+        "func": "let jsonInput = JSON.stringify(msg.payload);\nmsg.payload = `python3 medication_adherence.py '${jsonInput}'`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "6f930f818b0eca0a"
+            ]
+        ]
+    },
+    {
+        "id": "6f930f818b0eca0a",
+        "type": "exec",
+        "z": "a49afda26cd8355f",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "49a8fa10178dc286"
+            ],
+            [
+                "bdbe93e7e6bd2aba"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "bdbe93e7e6bd2aba",
+        "type": "debug",
+        "z": "a49afda26cd8355f",
+        "name": "Error message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "49a8fa10178dc286",
+        "type": "debug",
+        "z": "a49afda26cd8355f",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 80,
+        "wires": []
+    }
+]
